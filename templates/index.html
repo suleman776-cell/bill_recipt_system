@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bill Receipt System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <h1> Bill Receipt System</h1>
+        <form method="POST">
+            <label>Customer Name:</label>
+            <input name="customer_name" placeholder="Enter customer name" required><br>
+
+            <table id="items-table">
+                <tr>
+                    <th>Item Name</th>
+                    <th>Quantity</th>
+                    <th>Unit Price</th>
+                </tr>
+                <tr class="item-row">
+                    <td><input name="item_name" placeholder="Item name"></td>
+                    <td><input type="number" name="qty" min="1" value="1"></td>
+                    <td><input type="number" name="unit_price" step="0.01" placeholder="0.00"></td>
+                </tr>
+            </table>
+
+            <button type="button" class="add-btn" onclick="addItem()">+ Add Another Item</button><br><br>
+
+            <label>Tax %:</label>
+            <input type="number" name="tax" step="0.01" placeholder="Enter tax percentage">
+            <label>Discount %:</label>
+            <input type="number" name="discount" step="0.01" placeholder="Enter discount percentage"><br><br>
+
+            <button type="submit">Generate Receipt</button>
+        </form>
+    </div>
+</div>
+
+<script>
+function addItem() {
+    const table = document.getElementById('items-table');
+    const newRow = table.insertRow(-1);
+    newRow.classList.add('item-row');
+    newRow.innerHTML = `
+        <td><input name="item_name" placeholder="Item name"></td>
+        <td><input type="number" name="qty" min="1" value="1"></td>
+        <td><input type="number" name="unit_price" step="0.01" placeholder="0.00"></td>
+    `;
+}
+</script>
+</body>
+</html>

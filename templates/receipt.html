@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Receipt</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <h1> Store Receipt</h1>
+        <p><b>Customer:</b> {{ customer }}<br>
+        <b>Date:</b> {{ date }}</p>
+
+        <table>
+            <tr>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Unit Price</th>
+                <th>Subtotal</th>
+            </tr>
+            {% for item in items %}
+            <tr>
+                <td>{{ item.name }}</td>
+                <td>{{ item.qty }}</td>
+                <td>{{ "%.2f"|format(item.unit_price) }}</td>
+                <td>{{ "%.2f"|format(item.subtotal) }}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="3" class="total">Subtotal</td>
+                <td>{{ "%.2f"|format(subtotal) }}</td>
+            </tr>
+            <tr>
+                <td colspan="3" class="total">Tax ({{ tax_percent }}%)</td>
+                <td>{{ "%.2f"|format(tax) }}</td>
+            </tr>
+            <tr>
+                <td colspan="3" class="total">Discount ({{ discount_percent }}%)</td>
+                <td>-{{ "%.2f"|format(discount) }}</td>
+            </tr>
+            <tr>
+                <td colspan="3" class="total">Grand Total</td>
+                <td>{{ "%.2f"|format(grand_total) }}</td>
+            </tr>
+        </table>
+
+        <div class="center">
+            <button onclick="window.print()"> Print Receipt</button>
+        </div>
+        <p class="center">Thank You! Visit Again </p>
+    </div>
+</div>
+</body>
+</html>
+
+
